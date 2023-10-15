@@ -1,13 +1,19 @@
 import os
+import sys
+
+# Check if the right number of command-line arguments are provided
+if len(sys.argv) != 4:
+    print("Usage: python script_name.py <directory> <search_word> <output_file>")
+    sys.exit(1)
 
 # Define the directory to scan
-directory = 'C:/Users/Zachary/WebstormProjects/CaSMM_fork_2023/server/'
+directory1 = sys.argv[1]
 
 # Define the word to search for
-search_word = 'day'
+search_word1 = sys.argv[2]
 
 # Define the output file to store scan results
-output_file = 'scan_results.txt'
+output_file1 = sys.argv[3]
 
 
 # Function to scan a file for the word and save results to the output file
@@ -22,15 +28,13 @@ def scan_file_for_word(file_path, word, output):
                     output.write(result)
     except Exception as e:
         error_message = f'Error scanning {file_path}: {str(e)}\n'
-        # output.write(error_message)
         print(error_message)
-        # do not output error message to file
 
 
 # Open the output file for writing
-with open(output_file, 'w', encoding='utf-8') as output:
+with open(output_file1, 'w', encoding='utf-8') as output:
     # Recursively scan all files in the directory
-    for root, _, files in os.walk(directory):
+    for root, _, files in os.walk(directory1):
         for file_name in files:
             file_path = os.path.join(root, file_name)
-            scan_file_for_word(file_path, search_word, output)
+            scan_file_for_word(file_path, search_word1, output)
